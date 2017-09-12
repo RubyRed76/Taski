@@ -1,0 +1,41 @@
+<% @projects.each do |project| %>
+<!-- 	<p>	
+	<h3><strong><%#= project.title %></strong></h3>
+	-<em><%#= project.description %></em><hr>
+
+
+
+	</p> -->
+<% end %>
+
+
+
+
+<% @projects.each do |project| %>
+	<p>	
+
+
+
+
+	<%#= project.inspect %>
+
+<!-- 
+	<strong><%#= project.title %></strong> - <em><%#= project.description %></em><hr> | <%#= project.percent_complete %>
+ -->
+
+<!--  	<strong><%#= project.title %></strong> 
+ 	- <em><%#= project.description %></em>
+ 	<%#= ", ( #{project.percent_complete} % Complete)" if project.percent_complete != nil %>
+ 	<hr> -->
+
+
+
+
+
+ 	<strong><%= project.title %></strong> 
+ 	- <em><%= project.description %></em>
+ 	<%= ", ( #{project.percent_complete} % Complete)" unless !project.percent_complete %>
+ 	<hr>
+
+	</p>
+<% end %>

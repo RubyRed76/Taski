@@ -1,0 +1,46 @@
+<!-- <h1>Tasks show Page!</h1>
+<p>Find me in app/views/tasks/show.html.erb</p> -->
+ -->
+<!--One common practice is where a developer goes and writes a ton of code without testing anything out.  If you do that and get a bug, you don't know WHERE it is located-->
+<hr>
+<!-- <h3>testing....</h3> -->
+<h3><%= @task.title %></h3>
+<p><em><%= @task.description %></em></p>
+
+<h5>Task started: <%= @task.created_at %></h5>
+
+	<% if @task.created_at != @task.updated_at %>
+	<!--This works because out of the box created_at and updated_at are the SAME VALUE!-->
+	<!--IF they are the same, it HASN'T been updated, so no use showing "updated at".-->
+	<!--But if they are NOT the same, show when it was updated-->
+		<h5>Updated: <%= @task.updated_at %></h5>
+	<% end %>
+
+<% if @task.completed == true %>
+	<p id="finito"><em>Task is completed!</em></p>
+<% else %>
+	<p id="uhoh"><em>*** Task is pending! ***</em></p>
+<% end %>
+
+<!--We don't want the "Attachment link to show if we have NO attatchemnt...-->
+<% if !@task.task_file.blank? %>
+<!--.blank? is a Ruby string method that checks to see if the task file is blank-->
+<!--Could also do this:-->
+<!--  <%# unless @task.task_file.blank? %> -->
+	<p><%= link_to "Attachment", @task.task_file.to_s %></p>
+<% end %>
+
+<%= link_to "Edit", edit_project_task_path(@task.project_id, @task.id) %>
+<!--rake routes | grep task:  edit_project_task_path for the EDIT action!-->
+<!--From rake routes | grep task, looks like it needs a project id AND a task id-->
+
+<%= link_to "Back to Project", project_path(@task.project_id) %>
+
+<!-- Pull in Schema values to make it easier
+    t.string   "title"
+    t.text     "description"
+    t.integer  "project_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.boolean  "completed"
+    t.text     "task_file"

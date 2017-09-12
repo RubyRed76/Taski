@@ -1,0 +1,48 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @project.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @project.description %>
+</p>
+
+<p>
+  <strong>Percent complete:</strong>
+  <%= @project.percent_complete %>
+</p>
+
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>
+
+<hr>
+
+<h2>Tasks for Project</h2>
+
+<!--Integrate Tasks here-->
+<!--Technically could do it this way:-->
+<%#= @project.tasks.each do |task| %>
+<!--This WOULD work, however it breaks one of the antipattern rules -->
+<!--You really want little to NO actual logic going on in the View itself.-->
+<!--You really want to run this from the Model or the Controller-->
+<!--So we will put this in the ProjectsController!-->
+
+<% @tasks.each do |task| %>
+	
+<!--################# Why doesn't ".completed" work here if it DOES work in the Tasks Show page??-->
+
+
+ <%# if @task.completed == true %>
+<!--	<p id="finito"><%= link_to task.title, project_task_path(@project.id, task.id) %></p>
+<%# else %>
+	<p id="uhoh"><%= link_to task.title, project_task_path(@project.id, task.id) %></p>-->
+<%# end %> 
+
+
+	<p><%= link_to task.title, project_task_path(@project.id, task.id) %></p>
+<!--And this is a code block so we need an END-->
+<% end %>
+<%= link_to "Add a new Task for this project", new_project_task_path(project_id: @project.id) %>
